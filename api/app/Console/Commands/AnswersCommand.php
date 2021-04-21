@@ -41,6 +41,7 @@ class AnswersCommand extends Command
         $content = Storage::disk('local')->get('answers.txt');
         $data = $this->contentToArray($content);
 
+
         $this->table(['name', 'question', 'answer'], $data);
 
         return 0;
@@ -51,10 +52,9 @@ class AnswersCommand extends Command
         $data = [];
 
         $row = explode(PHP_EOL, $content);
-        foreach ($row as $key => $itemString) {
-            foreach (explode(',', $itemString) as $key => $item) {
-                $data[$key][] = $item;
-            }
+
+        foreach($row as $r) {
+            $data[] = explode(',', $r);     // daten im richtigen format ongeben!
         }
 
         return $data;
